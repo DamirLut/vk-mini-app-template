@@ -4,23 +4,24 @@ import App from './App';
 import '@vkontakte/vkui/dist/vkui.css';
 import './index.css';
 import bridge from '@vkontakte/vk-bridge';
-import { AdaptivityProvider, ConfigProvider } from '@vkontakte/vkui';
+import { AdaptivityProvider, AppRoot, ConfigProvider } from '@vkontakte/vkui';
 import { RouterContext } from '@happysanta/router';
 import { router } from '@/router';
 
 bridge.send('VKWebAppInit');
-
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ConfigProvider>
       <AdaptivityProvider>
         <RouterContext.Provider value={router}>
-          <App />
+          <AppRoot>
+            <App />
+          </AppRoot>
         </RouterContext.Provider>
       </AdaptivityProvider>
     </ConfigProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 if (import.meta.env.DEV) {
