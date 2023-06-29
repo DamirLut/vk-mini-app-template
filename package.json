@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "deploy": "pnpm build && node scripts/deploy.js",
+    "deploy": "vk-miniapps-deploy",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
     "prepare": "husky install"
   },

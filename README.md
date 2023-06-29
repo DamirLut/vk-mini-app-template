@@ -6,7 +6,10 @@
 
 - [**Vite**](https://vitejs.dev/) - Сборщик
 - [**Zustand**](https://github.com/pmndrs/zustand) - менеджер состояний
-- [**VK Router**](https://github.com/HappySanta/router) - router для VKUI
+- [**VK Router**](https://github.com/VKCOM/vk-mini-apps-router) - router от VK
+- [**ESLint**](https://eslint.org/) - JS linter
+- [**Prettier**](https://prettier.io/) - форматирование кода
+- [**Eruda**](https://github.com/liriliri/eruda) - консоль для мобилок
 
 ## Команды
 
@@ -23,5 +26,11 @@ npm run deploy
 
 # Открыть VK tunnel
 npm run tunnel
+
+# Запустить lint
+npm run lint
+
+# Запустить prettier
+npm run format
 
 ```
