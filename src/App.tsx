@@ -1,30 +1,62 @@
-import { useAuth } from '@/store/auth';
-import { useEffect } from 'react';
-import bridge from '@vkontakte/vk-bridge';
-import { useLocation } from '@happysanta/router';
-import { Root } from '@vkontakte/vkui';
-import ExampleView from '@/views/Example';
-import { Views } from '@/router';
+import React, { Suspense } from 'react';
+import {
+  useActiveVkuiLocation,
+  usePopout,
+  useRouteNavigator,
+} from '@vkontakte/vk-mini-apps-router';
+import {
+  Epic,
+  ModalRoot,
+  Root,
+  ScreenSpinner,
+  SplitCol,
+  SplitLayout,
+} from '@vkontakte/vkui';
 
-function App() {
-  const location = useLocation();
-  const setAccessToken = useAuth(select => select.setAccessToken);
+import { ErrorBoundary } from '@/components';
+import Navbar from '@/Navbar';
+import { routes } from '@/router';
+import { ExampleView } from '@/views';
 
-  useEffect(() => {
+export const App = () => {
+  const routerPopout = usePopout();
+  const routeNavigator = useRouteNavigator();
 
-    bridge.send('VKWebAppGetAuthToken').then((response) => {
-      setAccessToken(response.access_token);
-    }).catch(console.error);
+  const {
+    root: activeRoot = routes.root.id,
+    view: activeView = routes.root.default.id,
+    modal: activeModal,
+  } = useActiveVkuiLocation();
 
-  }, []);
+  const modal = (
+    <ModalRoot
+      activeModal={activeModal}
+      onClose={() => routeNavigator.hideModal()}
+    ></ModalRoot>
+  );
 
-  const activeView = location.getViewId();
+  const views = [
+    {
+      id: 'default',
+      element: ExampleView,
+    },
+  ];
 
   return (
-    <Root activeView={activeView}>
-      <ExampleView id={Views.Example} />
-    </Root>
+    <SplitLayout popout={routerPopout} modal={modal}>
+      <SplitCol width={'100%'} stretchedOnMobile autoSpaced>
+        <Epic activeStory={activeRoot} tabbar={<Navbar />}>
+          <Root activeView={activeView} nav={routes.root.id}>
+            {views.map((view) => (
+              <ErrorBoundary key={view.id} id={view.id}>
+                <Suspense fallback={<ScreenSpinner />}>
+                  <view.element nav={view.id} />
+                </Suspense>
+              </ErrorBoundary>
+            ))}
+          </Root>
+        </Epic>
+      </SplitCol>
+    </SplitLayout>
   );
-}
-
-export default App;
+};

@@ -1,27 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import '@vkontakte/vkui/dist/vkui.css';
-import './index.css';
 import bridge from '@vkontakte/vk-bridge';
-import { AdaptivityProvider, AppRoot, ConfigProvider } from '@vkontakte/vkui';
-import { RouterContext } from '@happysanta/router';
-import { router } from '@/router';
 
-bridge.send('VKWebAppInit');
+import { AppConfig } from '@/AppConfig';
+
+import '@vkontakte/vkui/dist/cssm/styles/themes.css';
+import './index.css';
+
+bridge.send('VKWebAppInit').then(() => console.log('[bridge] init'));
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ConfigProvider>
-      <AdaptivityProvider>
-        <RouterContext.Provider value={router}>
-          <AppRoot>
-            <App />
-          </AppRoot>
-        </RouterContext.Provider>
-      </AdaptivityProvider>
-    </ConfigProvider>
-  </React.StrictMode>
+  <AppConfig />
 );
 
 if (import.meta.env.DEV) {

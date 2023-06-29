@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import bridge, {
+    AnyReceiveMethodName,
     AnyRequestMethodName,
+    ReceiveData,
     RequestIdProp,
     RequestProps,
-    AnyReceiveMethodName,
-    ReceiveData,
 } from '@vkontakte/vk-bridge';
 
 export default function useBridge<K extends AnyRequestMethodName>(

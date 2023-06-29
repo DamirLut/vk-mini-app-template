@@ -1,23 +1,22 @@
-import { Group, Panel, PanelHeader, View } from '@vkontakte/vkui';
-import { useLocation } from '@happysanta/router';
-import { Panels } from '@/router';
+import { FC } from 'react';
+import { Group } from '@vkontakte/vkui';
 
-type ExampleProps = {
-  id: string;
-}
+import { ViewRoute } from '@/components';
+import { Page } from '@/components';
+import { routes } from '@/router';
 
-export default function ExampleView(props: ExampleProps) {
+type ViewProps = {
+  nav: string;
+};
 
-  const location = useLocation();
+export const ExampleView: FC<ViewProps> = (props) => {
+  const view = routes.root.default;
 
-  const activePanel = location.getPanelId();
-
-  return <View id={props.id} activePanel={activePanel}>
-    <Panel id={Panels.Example}>
-      <PanelHeader>Example Page</PanelHeader>
-      <Group>
-        Hello world
-      </Group>
-    </Panel>
-  </View>;
-}
+  return (
+    <ViewRoute nav={props.nav} defaultPanel={view.default.id}>
+      <Page nav={view.default.id} title={'Default'}>
+        <Group>Default page...</Group>
+      </Page>
+    </ViewRoute>
+  );
+};

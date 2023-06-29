@@ -1,25 +1,13 @@
-import { Page, Router } from '@happysanta/router';
+import {
+  createHashRouter,
+  createPanel,
+  createRoot,
+  createView,
+  RoutesConfig,
+} from '@vkontakte/vk-mini-apps-router';
 
-export enum Modal {
-  Example = 'example'
-}
+export const routes = RoutesConfig.create([
+  createRoot('root', [createView('default', [createPanel('default', `/`)])]),
+]);
 
-export enum Views {
-  Example = 'example'
-}
-
-export enum Panels {
-  Example = 'example'
-}
-
-export enum Pages {
-  Example = '/'
-}
-
-const routes = {
-  [Pages.Example]: new Page(Panels.Example, Views.Example),
-};
-
-export const router = new Router(routes);
-
-router.start();
+export const router = createHashRouter(routes.getRoutes());
