@@ -9,7 +9,6 @@
 - [**VK Router**](https://github.com/VKCOM/vk-mini-apps-router) - router от VK
 - [**ESLint**](https://eslint.org/) - JS linter
 - [**Prettier**](https://prettier.io/) - форматирование кода
-- [**Eruda**](https://github.com/liriliri/eruda) - консоль для мобилок
 
 ## Команды
 

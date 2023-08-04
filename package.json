@@ -1,8 +1,9 @@
 {
-  "name": "midis-rating",
-  "private": true,
+  "name": "vk-mini-app-template",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "author": "https://github.com/DamirLut",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
